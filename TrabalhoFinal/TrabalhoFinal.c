@@ -67,3 +67,24 @@ Task *insTask(Task *contact)
         return contact;
          //pois ele vai ser o primeiro elemento da lista.
     }
+     else
+    {
+        //lógica para adionar mais elementos.
+        aux = contact;
+        while (aux->next != NULL)
+        {
+            aux = aux->next;
+        }
+        //chegou aqui, o aux tem o último elemento;
+        aux->next = new;
+        aux->next->next = NULL;
+    }
+
+
+    printf("-------------------------------------------------\n");
+    printf("O seu novo contato foi inserido com sucesso!\n");
+    printf("-------------------------------------------------\n");
+
+
+    return contact;
+}
