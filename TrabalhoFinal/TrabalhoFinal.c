@@ -207,10 +207,13 @@ int main()
               case 4 : //queryTask();
                    printf("Por favor digite o nome da pessoa que você quer consultar\n");
                    scanf("%s", nome);
-                   queryContact(first, nome);
+                   queryTask(first, nome);
                    printf("\n");
                    break;
-              //case 5 : listTasks();
+              case 5 : //listTasks();
+                   listTasks(first);
+                   printf("\n");
+                   break;
           }
     }
     return 0;
