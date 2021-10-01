@@ -30,3 +30,16 @@ struct REC {
 
 // Tipo criado para instanciar variaveis do tipo acima
 typedef struct REC Task;
+// Apresenta o menu da aplicação e retorna a opção selecionada
+int menu()
+{
+    int op=0;
+    while (op!=EXIT)
+    {
+        printf("%d Finaliza",EXIT);
+        printf("\n: ");
+        scanf("%d",&op);
+       break;
+    }
+    return op;
+}
