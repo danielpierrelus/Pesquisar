@@ -19,7 +19,7 @@ typedef struct {
 	int day;
 	int month;
 } Date;
-/ Estrutura que contém os campos dos registros das tarefas
+// Estrutura que contém os campos dos registros das tarefas
 struct REC {
        char nome[50];
        int prioridade;
@@ -196,9 +196,20 @@ int main()
                    first = insTask(first);
                    printf("\n");
                    break;
-              //case 2 : delTask();
-              //case 3 : upTask();
-              //case 4 : queryTask();
+              case 2 : //delTask();
+                  printf("Por favor digite o nome da pessoa que você quer excluir\n");
+                  scanf("%s", nome);
+                  first = delTask(first, nome);
+                  printf("\n");
+                  break;
+              //case 3 : //upTask();
+                   
+              case 4 : //queryTask();
+                   printf("Por favor digite o nome da pessoa que você quer consultar\n");
+                   scanf("%s", nome);
+                   queryContact(first, nome);
+                   printf("\n");
+                   break;
               //case 5 : listTasks();
           }
     }
