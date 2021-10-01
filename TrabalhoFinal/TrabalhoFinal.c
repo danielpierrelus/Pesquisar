@@ -192,7 +192,10 @@ int main()
           op=menu();
           switch(op)
           {
-              //case 1 : insTask();
+              case 1 : //insTask();
+                   first = insTask(first);
+                   printf("\n");
+                   break;
               //case 2 : delTask();
               //case 3 : upTask();
               //case 4 : queryTask();
