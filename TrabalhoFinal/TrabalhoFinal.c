@@ -19,3 +19,14 @@ typedef struct {
 	int day;
 	int month;
 } Date;
+/ Estrutura que contém os campos dos registros das tarefas
+struct REC {
+       char nome[50];
+       int prioridade;
+       Date entrega; 
+	  struct REC *next; // implemente como lista, como árvore BST, AVL...
+	  struct REC *prev;
+};
+
+// Tipo criado para instanciar variaveis do tipo acima
+typedef struct REC Task;
