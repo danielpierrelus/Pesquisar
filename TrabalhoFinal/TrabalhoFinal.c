@@ -88,3 +88,42 @@ Task *insTask(Task *contact)
 
     return contact;
 }
+
+// Permite excluir uma tarefa
+Task *delTask(Task *task, char *name)
+{
+    Task *aux, *anterior = NULL;
+    int cont;
+
+    if (task == NULL)
+    {
+        printf("Infelizmente não temos contatos!\n");
+    }
+
+    for (aux = task; aux != NULL; aux = aux->next)
+    {
+        if (strcmp(aux->nome, name) == 0)
+        {
+            
+            if (task == aux)
+            {
+                task = aux->next;
+            }
+            else
+            {
+                anterior->next = aux->next;
+            }
+            free(aux);
+            cont = 1;
+        }
+        anterior = aux;
+    }
+    if (!cont)
+    {
+        printf("Infelizmente não temos contatos!\n");
+    }
+    printf("-------------------------------------------------\n");
+    printf("O seu novo contato foi excluido com sucesso!\n");
+    printf("-------------------------------------------------\n");
+    return task;
+}
