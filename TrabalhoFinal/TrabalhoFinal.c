@@ -43,3 +43,27 @@ int menu()
     }
     return op;
 }
+
+// Permite o cadastro de uma tarefa
+Task *insTask(Task *contact)
+{
+    Task *aux, *new;
+    new = (Task *)malloc(sizeof(Task));
+
+    printf("Por favor digite o nome da pessoa\n");
+    scanf("%s", new->nome);
+    printf("Por favor digite o email da pessoa\n");
+    scanf("%s", new->prioridade);
+    printf("Por favor digite o numero de telephone da pessoa\n");
+    scanf("%s", new->entrega);
+
+    //fim da leitura dos dados
+    if (contact == NULL)
+    {
+        contact = new;
+        printf("-------------------------------------------------\n");
+        printf("O seu novo contato foi inserido com sucesso!\n");
+        printf("-------------------------------------------------\n");
+        return contact;
+         //pois ele vai ser o primeiro elemento da lista.
+    }
