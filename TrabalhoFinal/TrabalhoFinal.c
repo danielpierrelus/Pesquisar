@@ -52,9 +52,9 @@ Task *insTask(Task *contact)
 
     printf("Por favor digite o nome da pessoa\n");
     scanf("%s", new->nome);
-    printf("Por favor digite o email da pessoa\n");
+    printf("Por favor digite a prioridade da pessoa\n");
     scanf("%s", new->prioridade);
-    printf("Por favor digite o numero de telephone da pessoa\n");
+    printf("Por favor digite a data de entrega da pessoa\n");
     scanf("%s", new->entrega);
 
     //fim da leitura dos dados
@@ -90,7 +90,7 @@ Task *insTask(Task *contact)
 }
 
 // Permite excluir uma tarefa
-Task *delTask(Task *task, char *name)
+Task *delTask(Task *task, char *nome)
 {
     Task *aux, *anterior = NULL;
     int cont;
@@ -102,7 +102,7 @@ Task *delTask(Task *task, char *name)
 
     for (aux = task; aux != NULL; aux = aux->next)
     {
-        if (strcmp(aux->nome, name) == 0)
+        if (strcmp(aux->nome, nome) == 0)
         {
             
             if (task == aux)
@@ -120,10 +120,10 @@ Task *delTask(Task *task, char *name)
     }
     if (!cont)
     {
-        printf("Infelizmente não temos contatos!\n");
+        printf("Infelizmente não temos tarefa!\n");
     }
     printf("-------------------------------------------------\n");
-    printf("O seu novo contato foi excluido com sucesso!\n");
+    printf("O seu nova tarefa foi excluido com sucesso!\n");
     printf("-------------------------------------------------\n");
     return task;
 }
@@ -133,7 +133,7 @@ void listTasks(Task *task)
 {   
   Task *aux;
   if(task == NULL){
-    printf("Infelizmente não temos contatos!\n"); 
+    printf("Infelizmente não temos tarefa!\n"); 
   }
     printf("-------------------------------------------------\n");
     printf("O contatos cadastrados!!!\n");
@@ -147,22 +147,22 @@ void listTasks(Task *task)
 }
 
 // Permite consultar uma tarefa da lista pelo nome
-void *queryTask(Task *contact, char name[100])
+void *queryTask(Task *contact, char nome[50])
 {  
     Task *aux;
     int cont;
 
     if (contact == NULL)
     {
-        printf("Infelizmente não temos contatos!\n");
+        printf("Infelizmente não temos tarefa!\n");
     }
     printf("-------------------------------------------------\n");
-    printf("Os dados do %s sâo!!!\n", name);
+    printf("Os dados do %s sâo!!!\n", nome);
     printf("-------------------------------------------------\n");
 
     for (aux = contact; aux != NULL; aux = aux->next)
     {
-        if (strcmp(aux->nome, name) == 0)
+        if (strcmp(aux->nome, nome) == 0)
         {
                 printf("%s, %s, %s\n", aux->nome, aux->prioridade, aux->entrega);
             cont = 1;
@@ -170,7 +170,7 @@ void *queryTask(Task *contact, char name[100])
     }
     if (!cont)
     {
-        printf("Infelizmente não temos contatos!\n");
+        printf("Infelizmente não temos tarefa!\n");
     }
     
 }
