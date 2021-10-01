@@ -174,3 +174,30 @@ void *queryTask(Task *contact, char name[100])
     }
     
 }
+
+// Permite a atualização dos dados de uma tarefa
+void upTask ()
+{
+     return;
+}
+
+// Programa principal
+int main()
+{
+    int op=0;
+    Task t;
+
+    while (op!=EXIT)
+    {
+          op=menu();
+          switch(op)
+          {
+              //case 1 : insTask();
+              //case 2 : delTask();
+              //case 3 : upTask();
+              //case 4 : queryTask();
+              //case 5 : listTasks();
+          }
+    }
+    return 0;
+}
