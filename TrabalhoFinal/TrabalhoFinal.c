@@ -145,3 +145,32 @@ void listTasks(Task *task)
   }
     
 }
+
+// Permite consultar uma tarefa da lista pelo nome
+void *queryTask(Task *contact, char name[100])
+{  
+    Task *aux;
+    int cont;
+
+    if (contact == NULL)
+    {
+        printf("Infelizmente não temos contatos!\n");
+    }
+    printf("-------------------------------------------------\n");
+    printf("Os dados do %s sâo!!!\n", name);
+    printf("-------------------------------------------------\n");
+
+    for (aux = contact; aux != NULL; aux = aux->next)
+    {
+        if (strcmp(aux->nome, name) == 0)
+        {
+                printf("%s, %s, %s\n", aux->nome, aux->prioridade, aux->entrega);
+            cont = 1;
+        }
+    }
+    if (!cont)
+    {
+        printf("Infelizmente não temos contatos!\n");
+    }
+    
+}
