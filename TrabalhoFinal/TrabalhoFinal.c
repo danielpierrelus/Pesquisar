@@ -127,3 +127,21 @@ Task *delTask(Task *task, char *name)
     printf("-------------------------------------------------\n");
     return task;
 }
+
+// Lista o conteudo da agenda (todos os campos)
+void listTasks(Task *task)
+{   
+  Task *aux;
+  if(task == NULL){
+    printf("Infelizmente não temos contatos!\n"); 
+  }
+    printf("-------------------------------------------------\n");
+    printf("O contatos cadastrados!!!\n");
+    printf("-------------------------------------------------\n");
+  aux = task;
+  while(aux !=NULL){
+    printf("-> %s, %s, %s\n", aux->nome, aux->prioridade, aux->entrega);
+    aux = aux->next;
+  }
+    
+}
