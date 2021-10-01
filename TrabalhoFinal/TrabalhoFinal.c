@@ -184,6 +184,8 @@ void upTask ()
 // Programa principal
 int main()
 {
+    Task *first = NULL;
+    char nome[50];
     int op=0;
     Task t;
 
@@ -197,7 +199,7 @@ int main()
                    printf("\n");
                    break;
               case 2 : //delTask();
-                  printf("Por favor digite o nome da pessoa que você quer excluir\n");
+                  printf("Por favor digite o nome que você quer delete\n");
                   scanf("%s", nome);
                   first = delTask(first, nome);
                   printf("\n");
@@ -205,7 +207,7 @@ int main()
               //case 3 : //upTask();
                    
               case 4 : //queryTask();
-                   printf("Por favor digite o nome da pessoa que você quer consultar\n");
+                   printf("Por favor digite o nome que você quer consultar\n");
                    scanf("%s", nome);
                    queryTask(first, nome);
                    printf("\n");
