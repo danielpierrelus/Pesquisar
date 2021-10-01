@@ -62,7 +62,7 @@ Task *insTask(Task *contact)
     {
         contact = new;
         printf("-------------------------------------------------\n");
-        printf("O seu novo contato foi inserido com sucesso!\n");
+        printf("A sua nova entraga foi inserido com sucesso!\n");
         printf("-------------------------------------------------\n");
         return contact;
          //pois ele vai ser o primeiro elemento da lista.
@@ -82,7 +82,7 @@ Task *insTask(Task *contact)
 
 
     printf("-------------------------------------------------\n");
-    printf("O seu novo contato foi inserido com sucesso!\n");
+    printf("A sua nova entrega foi inserido com sucesso!\n");
     printf("-------------------------------------------------\n");
 
 
@@ -97,7 +97,7 @@ Task *delTask(Task *task, char *nome)
 
     if (task == NULL)
     {
-        printf("Infelizmente não temos contatos!\n");
+        printf("Infelizmente não temos tarefa!\n");
     }
 
     for (aux = task; aux != NULL; aux = aux->next)
@@ -123,7 +123,7 @@ Task *delTask(Task *task, char *nome)
         printf("Infelizmente não temos tarefa!\n");
     }
     printf("-------------------------------------------------\n");
-    printf("O seu nova tarefa foi excluido com sucesso!\n");
+    printf("A sua nova tarefa foi excluido com sucesso!\n");
     printf("-------------------------------------------------\n");
     return task;
 }
