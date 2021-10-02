@@ -46,32 +46,32 @@ int menu()
 }
 
 // Permite o cadastro de uma tarefa
-Task *insTask(Task *contact)
+Task *insTask(Task *tarefa)
 {
     Task *aux, *new;
     new = (Task *)malloc(sizeof(Task));
 
-    printf("Por favor digite o nome da pessoa\n");
+    printf("Por favor digite o nome da tarefa\n");
     scanf("%s", new->nome);
-    printf("Por favor digite a prioridade da pessoa\n");
+    printf("Por favor digite a prioridade da tarefa\n");
     scanf("%d", &new->prioridade);
-    printf("Por favor digite a data de entrega da pessoa\n");
+    printf("Por favor digite a data de entrega da tarefa\n");
     scanf("%d/%d", &new->entrega.day, &new->entrega.month);
 
     //fim da leitura dos dados
-    if (contact == NULL)
+    if (tarefa == NULL)
     {
-        contact = new;
+        tarefa = new;
         printf("-------------------------------------------------\n");
         printf("A sua nova entraga foi inserido com sucesso!\n");
         printf("-------------------------------------------------\n");
-        return contact;
+        return tarefa;
          //pois ele vai ser o primeiro elemento da lista.
     }
      else
     {
         //lógica para adionar mais elementos.
-        aux = contact;
+        aux = tarefa;
         while (aux->next != NULL)
         {
             aux = aux->next;
@@ -87,7 +87,7 @@ Task *insTask(Task *contact)
     printf("-------------------------------------------------\n");
 
 
-    return contact;
+    return tarefa;
 }
 
 // Permite excluir uma tarefa
@@ -137,7 +137,7 @@ void listTasks(Task *task)
     printf("Infelizmente não temos tarefa!\n"); 
   }
     printf("-------------------------------------------------\n");
-    printf("O contatos cadastrados!!!\n");
+    printf("A tarefa cadastrados!!!\n");
     printf("-------------------------------------------------\n");
   aux = task;
   while(aux !=NULL){
@@ -224,11 +224,12 @@ int main()
           switch(op)
           {
               case 1 : //insTask();
+                   printf("Por favor cadastra  uma tarefa\n");
                    first = insTask(first);
                    printf("\n");
                    break;
               case 2 : //delTask();
-                  printf("Por favor digite o nome que você quer delete\n");
+                  printf("Por favor digite o nome da tarefa que você quer delete\n");
                   scanf("%s", nome);
                   first = delTask(first, nome);
                   printf("\n");
