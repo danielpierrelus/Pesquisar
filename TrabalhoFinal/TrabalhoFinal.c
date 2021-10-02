@@ -54,9 +54,9 @@ Task *insTask(Task *contact)
     printf("Por favor digite o nome da pessoa\n");
     scanf("%s", new->nome);
     printf("Por favor digite a prioridade da pessoa\n");
-    scanf("%d", new->prioridade);
+    scanf("%d", &new->prioridade);
     printf("Por favor digite a data de entrega da pessoa\n");
-    scanf("%s", new->entrega);
+    scanf("%d/%d", &new->entrega.day, &new->entrega.month);
 
     //fim da leitura dos dados
     if (contact == NULL)
@@ -141,7 +141,7 @@ void listTasks(Task *task)
     printf("-------------------------------------------------\n");
   aux = task;
   while(aux !=NULL){
-    printf("-> %s, %s, %s\n", aux->nome, aux->prioridade, aux->entrega);
+    printf("-> %s, %d, %d/%d \n", aux->nome, aux->prioridade, aux->entrega.day, aux->entrega.month);
     aux = aux->next;
   }
     
@@ -165,7 +165,7 @@ void *queryTask(Task *contact, char nome[50])
     {
         if (strcmp(aux->nome, nome) == 0)
         {
-                printf("%s, %s, %s\n", aux->nome, aux->prioridade, aux->entrega);
+                printf("%s, %d, %d/%d\n", aux->nome, aux->prioridade, aux->entrega.day, aux->entrega.month);
             cont = 1;
         }
     }
