@@ -10,7 +10,8 @@
 */
 
 #include <stdio.h> 
-
+#include <stdlib.h>
+#include <string.h>
 
 #define EXIT 10  // valor fixo para a opção que finaliza a aplicação
 
@@ -53,7 +54,7 @@ Task *insTask(Task *contact)
     printf("Por favor digite o nome da pessoa\n");
     scanf("%s", new->nome);
     printf("Por favor digite a prioridade da pessoa\n");
-    scanf("%s", new->prioridade);
+    scanf("%d", new->prioridade);
     printf("Por favor digite a data de entrega da pessoa\n");
     scanf("%s", new->entrega);
 
@@ -180,6 +181,34 @@ void upTask ()
 {
      return;
 }
+
+
+
+
+//Uma função de teste para fazer o update de uma lista encadeada
+// void update_data(int old, int new) {
+//    int pos = 0;
+   
+//    if(head==NULL) {
+//       printf("Linked List not initialized");
+//       return;
+//    } 
+
+//    current = head;
+//    while(current->next!=NULL) {
+//       if(current->data == old) {
+//          current->data = new;
+//          printf("\n%d found at position %d, replaced with %d\n", old, pos, new);
+//          return;
+//       }
+      
+//       current = current->next;
+//       pos++;
+//    }
+   
+//    printf("%d does not exist in the list\n", old);
+// }
+
 
 // Programa principal
 int main()
