@@ -224,7 +224,6 @@ int main()
           switch(op)
           {
               case 1 : //insTask();
-                   printf("Por favor cadastra  uma tarefa\n");
                    first = insTask(first);
                    printf("\n");
                    break;
