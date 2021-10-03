@@ -37,10 +37,20 @@ int menu()
     int op=0;
     while (op!=EXIT)
     {
-        printf("%d Finaliza",EXIT);
-        printf("\n: ");
-        scanf("%d",&op);
-       break;
+         printf("***************************\n");
+          printf("Digite a op desta");
+          printf("Digite a Opção desejada: "
+          "\n [1] Cadastra tarefa na lista: "
+          "\n [2] Delete tarefa da lista: "
+          "\n [3] Editar uma tarefa; "
+          "\n [4] Consultar uma tarefa: "
+          "\n [5] Lista das tarefas:\n ");
+          //"\n[10] Sair do programa:\n");
+          printf("[%d] Finaliza",EXIT);
+          printf("\n: ");
+          scanf("%d",&op);
+          printf("***************************\n");
+          break;
     }
     return op;
 }
@@ -245,6 +255,9 @@ int main()
                    listTasks(first);
                    printf("\n");
                    break;
+
+              
+              
           }
     }
     return 0;
