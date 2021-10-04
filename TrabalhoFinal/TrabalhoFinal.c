@@ -109,6 +109,7 @@ Task *delTask(Task *task, char *nome)
     if (task == NULL)
     {
         printf("Infelizmente não temos tarefa!\n");
+        return;
     }
 
     for (aux = task; aux != NULL; aux = aux->next)
@@ -126,6 +127,14 @@ Task *delTask(Task *task, char *nome)
             }
             free(aux);
             cont = 1;
+             printf("-------------------------------------------------\n");
+             printf("A sua nova tarefa foi excluido com sucesso!\n");
+             printf("-------------------------------------------------\n");
+        }
+        else{
+             printf("-------------------------------------------------\n");
+             printf("Não encontramos essa tarefa!\n");
+             printf("-------------------------------------------------\n");
         }
         anterior = aux;
     }
@@ -133,9 +142,7 @@ Task *delTask(Task *task, char *nome)
     {
         printf("Infelizmente não temos tarefa!\n");
     }
-    printf("-------------------------------------------------\n");
-    printf("A sua nova tarefa foi excluido com sucesso!\n");
-    printf("-------------------------------------------------\n");
+   
     return task;
 }
 
@@ -144,15 +151,17 @@ void listTasks(Task *task)
 {   
   Task *aux;
   if(task == NULL){
-    printf("Infelizmente não temos tarefa!\n"); 
-  }
-    printf("-------------------------------------------------\n");
-    printf("A tarefa cadastrados!!!\n");
-    printf("-------------------------------------------------\n");
-  aux = task;
-  while(aux !=NULL){
-    printf("-> %s, %d, %d/%d \n", aux->nome, aux->prioridade, aux->entrega.day, aux->entrega.month);
-    aux = aux->next;
+    printf("Infelizmente não temos tarefa!\n");
+    return; 
+  } else{
+       printf("-------------------------------------------------\n");
+       printf("A tarefa cadastrados!!!\n");
+       printf("-------------------------------------------------\n");
+       aux = task;
+      while(aux !=NULL){
+          printf("-> %s, %d, %d/%d \n", aux->nome, aux->prioridade, aux->entrega.day, aux->entrega.month);
+          aux = aux->next;
+    }
   }
     
 }
@@ -165,7 +174,8 @@ void *queryTask(Task *contact, char nome[50])
 
     if (contact == NULL)
     {
-        printf("Infelizmente não temos tarefa!\n");
+        printf("Infelizmente não temos esse de tarefa!\n");
+        return;
     }
     printf("-------------------------------------------------\n");
     printf("Os dados do %s sâo!!!\n", nome);
@@ -181,7 +191,7 @@ void *queryTask(Task *contact, char nome[50])
     }
     if (!cont)
     {
-        printf("Infelizmente não temos tarefa!\n");
+        printf("Infelizmente não temos esse nome de tarefa!\n");
     }
     
 }
