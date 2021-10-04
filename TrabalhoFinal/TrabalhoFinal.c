@@ -174,19 +174,22 @@ void *queryTask(Task *contact, char nome[50])
 
     if (contact == NULL)
     {
-        printf("Infelizmente não temos esse de tarefa!\n");
+        printf("Infelizmente não temos esse nome de tarefa!\n");
         return;
     }
-    printf("-------------------------------------------------\n");
-    printf("Os dados do %s sâo!!!\n", nome);
-    printf("-------------------------------------------------\n");
-
+    
     for (aux = contact; aux != NULL; aux = aux->next)
     {
         if (strcmp(aux->nome, nome) == 0)
         {
+            printf("-------------------------------------------------\n");
+            printf("Os dados do %s sâo!!!\n", nome);
+            printf("-------------------------------------------------\n");
+
                 printf("%s, %d, %d/%d\n", aux->nome, aux->prioridade, aux->entrega.day, aux->entrega.month);
             cont = 1;
+        }else{
+            printf("Infelizmente não temos esse nome de tarefa!\n");
         }
     }
     if (!cont)
