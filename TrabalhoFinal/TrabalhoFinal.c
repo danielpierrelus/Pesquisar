@@ -276,10 +276,6 @@ Task *upTask(Task *tarefa, char nome[50])
      return tarefa;
 }
 
-
-
-
-
 // Programa principal
 int main()
 {
