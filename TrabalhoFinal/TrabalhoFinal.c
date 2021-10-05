@@ -38,14 +38,13 @@ int menu()
     while (op!=EXIT)
     {
          printf("***************************\n");
-          printf("Digite a op desta");
           printf("Digite a Opção desejada: "
           "\n [1] Cadastra tarefa na lista: "
-          "\n [2] Delete tarefa da lista: "
-          "\n [3] Editar uma tarefa; "
-          "\n [4] Consultar uma tarefa: "
-          "\n [5] Lista das tarefas:\n ");
-          //"\n[10] Sair do programa:\n");
+          "\n [2] Delete tarefa na lista: "
+          "\n [3] Editar uma tarefa na lista; "
+          "\n [4] Consultar uma tarefa na lista: "
+          "\n [5] Lista das tarefas: \n"
+          );
           printf("[%d] Finaliza",EXIT);
           printf("\n: ");
           scanf("%d",&op);
@@ -109,7 +108,7 @@ Task *delTask(Task *task, char *nome)
     if (task == NULL)
     {
         printf("Infelizmente não temos tarefa!\n");
-        return;
+        return task;
     }
 
     for (aux = task; aux != NULL; aux = aux->next)
@@ -167,18 +166,18 @@ void listTasks(Task *task)
 }
 
 // Permite consultar uma tarefa da lista pelo nome
-void *queryTask(Task *contact, char nome[50])
+void *queryTask(Task *tarefa, char nome[50])
 {  
     Task *aux;
     int cont;
 
-    if (contact == NULL)
+    if (tarefa == NULL)
     {
         printf("Infelizmente não temos esse nome de tarefa!\n");
-        return;
+        return tarefa;
     }
     
-    for (aux = contact; aux != NULL; aux = aux->next)
+    for (aux = tarefa; aux != NULL; aux = aux->next)
     {
         if (strcmp(aux->nome, nome) == 0)
         {
@@ -199,38 +198,86 @@ void *queryTask(Task *contact, char nome[50])
     
 }
 
-// Permite a atualização dos dados de uma tarefa
-void upTask ()
+void setData(Date *dt, int d, int m)
 {
-     return;
+     dt->day = d;
+     dt->month = m;
 }
 
 
 
+// Permite a atualização dos dados de um contato da agenda
+Task *upTask(Task *tarefa, char nome[50])
+{
+     Task *aux;
+     int cont;
+     int opcao;
+     char *name;
+     int *prioridade;
+     int d, m;
+     if (tarefa == NULL)
+     {
+          printf("Infelizmente não temos tarefa!\n");
+     }
 
-//Uma função de teste para fazer o update de uma lista encadeada
-// void update_data(int old, int new) {
-//    int pos = 0;
-   
-//    if(head==NULL) {
-//       printf("Linked List not initialized");
-//       return;
-//    } 
+     for (aux = tarefa; aux != NULL; aux = aux->next)
+     {
+          if (strcmp(aux->nome, nome) == 0)
+          {
+               printf("--------------------------------\n");
+               printf("Dgite 1 para alterar o nome da entrega ..!\n");
+               printf("Dgite 2 para alterar a prioridade..!\n");
+               printf("Dgite 3 para alterar a data de entrega..!\n");
+               printf("--------------------------------\n");
+               printf("\n");
 
-//    current = head;
-//    while(current->next!=NULL) {
-//       if(current->data == old) {
-//          current->data = new;
-//          printf("\n%d found at position %d, replaced with %d\n", old, pos, new);
-//          return;
-//       }
-      
-//       current = current->next;
-//       pos++;
-//    }
-   
-//    printf("%d does not exist in the list\n", old);
-// }
+               printf("Escholhe uma opçao...!\n");
+               scanf("%d", &opcao);
+
+               if (opcao == 1)
+               {
+                    nome = aux->nome;
+                    printf("Digite o nome da tarefas: \n");
+                    scanf("%s", nome);
+                    printf("Nome alterado com sucesso..!\n");
+                    printf("\n");
+               }
+
+               if (opcao == 2)
+               {
+                    prioridade = &aux->prioridade;
+                    printf("Digite a prioridade: \n");
+                    scanf("%d", prioridade);
+                    printf("Prioridade alterado com sucesso..!\n");
+                    printf("\n");
+               }
+
+               if (opcao == 3)
+               {
+                    printf("Digite a data de entrega: \n");
+                    scanf("%d/%d", &d, &m);
+                    setData(&aux->entrega, d, m );
+                    printf("Data de entrega alterado com sucesso..!\n");
+               }
+
+               printf("Nome: %s\nPrioridade: %d\nData de entrega: %d/%d\n", aux->nome,  aux->prioridade, aux->entrega.day, aux->entrega.month);
+               cont = 1;
+               printf("\n");
+          }else{
+            printf("Infelizmente não temos esse nome de tarefa!\n");
+        }
+     }
+
+     if (!cont)
+     {
+          printf("Infelizmente não temos tarefas!\n");
+     }
+
+     return tarefa;
+}
+
+
+
 
 
 // Programa principal
@@ -251,13 +298,16 @@ int main()
                    printf("\n");
                    break;
               case 2 : //delTask();
-                  printf("Por favor digite o nome da tarefa que você quer delete\n");
+                  printf("Por favor digite o nome da tarefa que você quer excluir\n");
                   scanf("%s", nome);
                   first = delTask(first, nome);
                   printf("\n");
                   break;
-              //case 3 : //upTask();
-                   
+              case 3 : //upTask();
+                    printf("Digite o nome da tarefa que voce quer editar\n");
+                    scanf("%s", nome);
+                    first = upTask(first, nome);
+                    break;
               case 4 : //queryTask();
                    printf("Por favor digite o nome que você quer consultar\n");
                    scanf("%s", nome);
