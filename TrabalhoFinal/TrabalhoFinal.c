@@ -8,6 +8,8 @@
 	- Não serão toleradas variaveis globais;
 	- Caso seja detectado plágio, os grupos envolvidos receberão nota 0.
 */
+// Trabalho fazer para Daniel Pierrelus & Kerby Lovince
+
 
 #include <stdio.h> 
 #include <stdlib.h>
