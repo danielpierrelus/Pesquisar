@@ -212,7 +212,7 @@ Task *download(FILE *arquivo, Task *novo){
       char nome[100];
       int dia;
       int mes, prioridade;
-      while((fscanf(arquivo,"tarefa:%s -Date entrega: %d/%d -prioridade: %d\n",&nome,&dia,&mes,&prioridade))){
+      while((fscanf(arquivo,"tarefa:%s -Data: %d/%d -prioridade: %d\n",&nome,&dia,&mes,&prioridade))){
         Task *prox= malloc(sizeof(Task));
         strcpy(prox->nome,nome);
         prox->entrega.day= dia;
@@ -368,13 +368,13 @@ int main()
         Task t;
 
         FILE *arquivo;
-        arquivo = fopen("arquivo.txt","r");
+        arquivo = fopen("arquivo.txt","rt");
 
         if(arquivo == NULL){
             printf("ERRO!, não registrar a tarefa\n");
             exit(1);
         } else {
-            first = download(arquivo, first);
+            first = downloadData(arquivo, first);
             
         }
         fclose(arquivo);
