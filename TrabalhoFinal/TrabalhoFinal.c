@@ -206,7 +206,37 @@ void setData(Date *dt, int d, int m)
      dt->month = m;
 }
 
+//FUNCAO
+Task *download(FILE *arquivo, Task *novo){
+      Task *aux,*anterior;
+      char nome[100];
+      int dia;
+      int mes, prioridade;
+      while((fscanf(arquivo,"tarefa:%s -Date entrega: %d/%d -prioridade: %d\n",&nome,&dia,&mes,&prioridade))){
+        Task *prox= malloc(sizeof(Task));
+        strcpy(prox->nome,nome);
+        prox->entrega.day= dia;
+        prox->entrega.month= mes;
+        prox->prioridade=prioridade;
 
+        prox->next=NULL;
+        prox->prev=NULL;
+
+        if(novo==NULL){
+          novo=prox;
+        }else
+        if(novo!=NULL){
+         // prox=getLast(novo);
+          prox->next=novo;
+         // novo->anterior=prox
+        }
+
+
+      }
+
+      return novo;
+
+}
 
 // Permite a atualização dos dados de um contato da agenda
 Task *upTask(Task *tarefa, char nome[50])
@@ -281,45 +311,110 @@ Task *upTask(Task *tarefa, char nome[50])
 // Programa principal
 int main()
 {
-    Task *first = NULL;
-    char nome[50];
-    int op=0;
-    Task t;
+    // printf("\nAgenda tarefa - \n");
+    
+    // Task *lista = (Task *) malloc(sizeof(Task));
 
-    while (op!=EXIT)
-    {
-          op=menu();
-          switch(op)
-          {
-              case 1 : //insTask();
-                   first = insTask(first);
-                   printf("\n");
-                   break;
-              case 2 : //delTask();
-                  printf("Por favor digite o nome da tarefa que você quer excluir\n");
-                  scanf("%s", nome);
-                  first = delTask(first, nome);
-                  printf("\n");
-                  break;
-              case 3 : //upTask();
-                    printf("Digite o nome da tarefa que voce quer editar\n");
-                    scanf("%s", nome);
-                    first = upTask(first, nome);
+	// if(!lista){
+	// 	printf("Sem memoria disponivel!\n");
+	// 	exit(1);
+	// }
+
+	// lista->next = NULL;
+    // //-------------------------------
+    // Task *aux,*new;
+    // aux = lista;
+    // Task c;
+    // FILE *arq;
+    // arq = fopen("arquivo.txt","r");
+
+    // if(arq == NULL){
+    //     printf("ERRO!\n");
+    //     exit(1);
+    // }
+    // fclose(arq);
+
+    // while( fscanf(arq,"Nome: %c - Data de entrega: %d/%d- Entrega: %s - Prioridade: %s\n", &c.nome, &c.entrega.day,&c.entrega.month, &c.prioridade) != EOF){
+    //     if(c.nome != NULL){
+    //         new = (Task*)malloc(sizeof(Task));
+    //         //printf("Por favor digite o nome da tarefa\n");
+    //         scanf("%s", new->nome);
+    //         //printf("Por favor digite a prioridade da tarefa\n");
+    //         scanf("%d", &new->prioridade);
+    //         //printf("Por favor digite a data de entrega da tarefa\n");
+    //         scanf("%d/%d", &new->entrega.day, &new->entrega.month);
+
+    //         // strcpy(new->nome, c.nome);
+    //         // strcpy(new->prioridade,c.prioridade);
+    //         // strcpy(new->entrega,&new->entrega.day, &new->entrega.month);
+    //         new->entrega = c.entrega;
+    //         new->next = NULL;
+    //         if(vazia(lista)){ // se a lista esta vazia adciona contact direto
+    //         lista->next = new;
+    //         }
+    //         else{
+    //             while(aux->next != NULL){
+    //                 aux = aux->next;
+    //             }
+    //         aux->next = new;
+    //         }
+    //     }
+    // }
+    // fclose(arq);
+//--------------------------------------
+        Task *first = NULL;
+        char nome[50];
+        int op=0;
+        Task t;
+
+        FILE *arquivo;
+        arquivo = fopen("arquivo.txt","r");
+
+        if(arquivo == NULL){
+            printf("ERRO!, não registrar a tarefa\n");
+            exit(1);
+        } else {
+            first = download(arquivo, first);
+            
+        }
+        fclose(arquivo);
+
+        while (op!=EXIT)
+        {
+            op=menu();
+            switch(op)
+            {
+                case 1 : //insTask();
+                    first = insTask(first);
+                    printf("\n");
                     break;
-              case 4 : //queryTask();
-                   printf("Por favor digite o nome que você quer consultar\n");
-                   scanf("%s", nome);
-                   queryTask(first, nome);
-                   printf("\n");
-                   break;
-              case 5 : //listTasks();
-                   listTasks(first);
-                   printf("\n");
-                   break;
+                case 2 : //delTask();
+                    printf("Por favor digite o nome da tarefa que você quer excluir\n");
+                    scanf("%s", nome);
+                    first = delTask(first, nome);
+                    printf("\n");
+                    break;
+                case 3 : //upTask();
+                        printf("Digite o nome da tarefa que voce quer editar\n");
+                        scanf("%s", nome);
+                        first = upTask(first, nome);
+                        break;
+                case 4 : //queryTask();
+                    printf("Por favor digite o nome que você quer consultar\n");
+                    scanf("%s", nome);
+                    queryTask(first, nome);
+                    printf("\n");
+                    break;
+                case 5 : //listTasks();
+                    listTasks(first);
+                    printf("\n");
+                    break;
 
-              
-              
-          }
+                
+                
+            }
+        }
+    //free(lista);
+
+        return 0;
     }
-    return 0;
-}
