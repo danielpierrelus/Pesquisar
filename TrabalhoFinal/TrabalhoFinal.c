@@ -206,7 +206,7 @@ void listTasks(Task *task)
 
           aux = aux->next;
     }
-                fclose(fptr);
+    fclose(fptr);
 
   }
     
