@@ -62,25 +62,28 @@ Task *insTask(Task *tarefa)
     Task *aux, *new;
     new = (Task *)malloc(sizeof(Task));
 
+   
     printf("Por favor digite o nome da tarefa\n");
     scanf("%s", new->nome);
     printf("Por favor digite a prioridade da tarefa\n");
     scanf("%d", &new->prioridade);
     printf("Por favor digite a data de entrega da tarefa\n");
     scanf("%d/%d", &new->entrega.day, &new->entrega.month);
+    //fprintf(fptr,"%d/%d\n",new->entrega.day, new->entrega.month);
+
+    //fclose(fptr);
 
     //fim da leitura dos dados
     if (tarefa == NULL)
     {
+       
         tarefa = new;
         printf("-------------------------------------------------\n");
         printf("A sua nova entraga foi inserido com sucesso!\n");
         printf("-------------------------------------------------\n");
-        return tarefa;
          //pois ele vai ser o primeiro elemento da lista.
-    }
-     else
-    {
+    }else{
+        
         //lógica para adionar mais elementos.
         aux = tarefa;
         while (aux->next != NULL)
@@ -96,7 +99,6 @@ Task *insTask(Task *tarefa)
     printf("-------------------------------------------------\n");
     printf("A sua nova entrega foi inserido com sucesso!\n");
     printf("-------------------------------------------------\n");
-
 
     return tarefa;
 }
@@ -147,22 +149,65 @@ Task *delTask(Task *task, char *nome)
     return task;
 }
 
+
+int cmp( const void *a, const void *b )
+{
+    const struct REC *left  = a;
+    const struct REC *right = b;
+
+    return ( left->nome < right->nome ) - ( right->nome < left->nome );  
+}
+
+
 // Lista o conteudo da agenda (todos os campos)
 void listTasks(Task *task)
 {   
   Task *aux;
+  struct REC ar[] = {};
+  
+
+  const size_t N = sizeof( ar ) / sizeof( *ar );
+
   if(task == NULL){
     printf("Infelizmente não temos tarefa!\n");
     return; 
   } else{
        printf("-------------------------------------------------\n");
-       printf("A tarefa cadastrados!!!\n");
+       printf("A tarefas cadastrada!!!\n");
        printf("-------------------------------------------------\n");
        aux = task;
+       qsort(ar, N, sizeof(struct REC), cmp);
+
+    //    for( size_t i = 0; i<N; i++) {
+    //          printf("-> %s, %d, %d/%d \n", ar[i].nome, ar[i].prioridade, ar[i].entrega.day, ar[i].entrega.month);
+    //    }
+
+    FILE *fptr;
+    fptr = fopen("arquivo.txt","w");
+
       while(aux !=NULL){
+          
+
           printf("-> %s, %d, %d/%d \n", aux->nome, aux->prioridade, aux->entrega.day, aux->entrega.month);
+            // use appropriate location if you are using MacOS or Linux
+         
+
+            if(fptr == NULL)
+            {
+                printf("Error!");  
+                exit(1);             
+            }
+            
+            fprintf(fptr,"%s\n",aux->nome);
+            fprintf(fptr,"%d\n",aux->prioridade);
+            fprintf(fptr,"%d/%d\n",aux->entrega.day, aux->entrega.month);
+            fprintf(fptr,"-------------------------\n");
+            //fprintf(fptr,"\n");
+
           aux = aux->next;
     }
+                fclose(fptr);
+
   }
     
 }
@@ -204,38 +249,6 @@ void setData(Date *dt, int d, int m)
 {
      dt->day = d;
      dt->month = m;
-}
-
-//FUNCAO
-Task *download(FILE *arquivo, Task *novo){
-      Task *aux,*anterior;
-      char nome[100];
-      int dia;
-      int mes, prioridade;
-      while((fscanf(arquivo,"tarefa:%s -Data: %d/%d -prioridade: %d\n",&nome,&dia,&mes,&prioridade))){
-        Task *prox= malloc(sizeof(Task));
-        strcpy(prox->nome,nome);
-        prox->entrega.day= dia;
-        prox->entrega.month= mes;
-        prox->prioridade=prioridade;
-
-        prox->next=NULL;
-        prox->prev=NULL;
-
-        if(novo==NULL){
-          novo=prox;
-        }else
-        if(novo!=NULL){
-         // prox=getLast(novo);
-          prox->next=novo;
-         // novo->anterior=prox
-        }
-
-
-      }
-
-      return novo;
-
 }
 
 // Permite a atualização dos dados de um contato da agenda
@@ -311,73 +324,12 @@ Task *upTask(Task *tarefa, char nome[50])
 // Programa principal
 int main()
 {
-    // printf("\nAgenda tarefa - \n");
-    
-    // Task *lista = (Task *) malloc(sizeof(Task));
 
-	// if(!lista){
-	// 	printf("Sem memoria disponivel!\n");
-	// 	exit(1);
-	// }
-
-	// lista->next = NULL;
-    // //-------------------------------
-    // Task *aux,*new;
-    // aux = lista;
-    // Task c;
-    // FILE *arq;
-    // arq = fopen("arquivo.txt","r");
-
-    // if(arq == NULL){
-    //     printf("ERRO!\n");
-    //     exit(1);
-    // }
-    // fclose(arq);
-
-    // while( fscanf(arq,"Nome: %c - Data de entrega: %d/%d- Entrega: %s - Prioridade: %s\n", &c.nome, &c.entrega.day,&c.entrega.month, &c.prioridade) != EOF){
-    //     if(c.nome != NULL){
-    //         new = (Task*)malloc(sizeof(Task));
-    //         //printf("Por favor digite o nome da tarefa\n");
-    //         scanf("%s", new->nome);
-    //         //printf("Por favor digite a prioridade da tarefa\n");
-    //         scanf("%d", &new->prioridade);
-    //         //printf("Por favor digite a data de entrega da tarefa\n");
-    //         scanf("%d/%d", &new->entrega.day, &new->entrega.month);
-
-    //         // strcpy(new->nome, c.nome);
-    //         // strcpy(new->prioridade,c.prioridade);
-    //         // strcpy(new->entrega,&new->entrega.day, &new->entrega.month);
-    //         new->entrega = c.entrega;
-    //         new->next = NULL;
-    //         if(vazia(lista)){ // se a lista esta vazia adciona contact direto
-    //         lista->next = new;
-    //         }
-    //         else{
-    //             while(aux->next != NULL){
-    //                 aux = aux->next;
-    //             }
-    //         aux->next = new;
-    //         }
-    //     }
-    // }
-    // fclose(arq);
-//--------------------------------------
         Task *first = NULL;
         char nome[50];
         int op=0;
         Task t;
 
-        FILE *arquivo;
-        arquivo = fopen("arquivo.txt","rt");
-
-        if(arquivo == NULL){
-            printf("ERRO!, não registrar a tarefa\n");
-            exit(1);
-        } else {
-            first = downloadData(arquivo, first);
-            
-        }
-        fclose(arquivo);
 
         while (op!=EXIT)
         {
